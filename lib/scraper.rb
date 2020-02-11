@@ -10,16 +10,18 @@ class Scraper
     
     scraped_students = [] 
     
-    html = Nokogiri::HTML(open(index_url)) #doc = Nokogiri::HTML(open(url provided))
-  
-    html.css(".student_card").each do |student_card| #doc.css(".post").each do |post|
+    doc = Nokogiri::HTML(open(index_url)) #doc = Nokogiri::HTML(open(url provided))
+      hash_array = doc.css{'a.card-text-container'}
+    
+    
+      doc.css(".student_card").each do |student_card| #doc.css(".post").each do |post|
       
       hash_array ={ #hash_array = iterate through the student cards id 
       
-      name: student_card.css("a .card-text-container h4.student-name").text, 
+      name: student_card.css("a.card-text-container h4.student-name").text, 
       #<a href=" ..."card-text-container"> <h4 class="student-name">{Student Name}</h4>
       
-      location: student_card.css("a .card-text-container p.student-location").text, 
+      location: student_card.css("a.card-text-container p.student-location").text, 
       #<a href=" ..."card-text-container"> <p class="student-location">{City, State}</p>
       
       profile_url: student_card.css("a").attribute("href").value 
