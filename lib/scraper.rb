@@ -13,28 +13,32 @@ class Scraper
   html = Nokogiri::HTML(open(index_url)) 
   #doc = Nokogiri::HTML(open("#https://learn-co-curriculum.github.io/student-scraper-test-page/"))
   
-  hashes_array = {} #iterate through the student cards id
-  
-  html.css(".student-card").each do |student-card|
+  html.css(".student_card").each do |student_card|
   #doc.css(".post").each do |post|
-    
-    :name <a href="students/{first_name-last_name}.html"> #course = Course.new
   
-      #course.title = post.css("h2").text
-  
-    :location <p class="student-location">{City, State}</p>
-      #course.schedule = post.css(".date").text
-  
-    #click to view profile(scrape_profile_page) to get profile_urls <h3 class="view-profile-text">View Profile</h3>
-      #course.description = post.css("p").text
-    
+  #hashes_array = {} #iterate through the student cards id 
+    hash_array ={
+      
+      name: student_card.css("a .card-text-container h4.student-name").text, 
+      #<a href=" ..."card-text-container"> <h4 class="student-name">{Student Name}</h4>
+      
+      location: student_card.css("a .card-text-container p.student-location").text, 
+      #<a href=" ..."card-text-container"> <p class="student-location">{City, State}</p>
+      
+      profile_url: student_card.css("a").attribute("href").value 
+      #use ().attribute().value <a href="{Twitter link and/or LinkedIn link and/or GitHub link}">    
+    #binding.pry 
+    } 
+    scraped_students << hash_array
+     
     end 
-    scraped_students << hashes_array #return the array hash 
+    scraped_students #return the students  
+    #binding.pry 
   end
 
   def self.scrape_profile_page(profile_url)
-    #:profile_url <div class="social-icon-container"> 
-    #                <a href="{Twitter link and/or LinkedIn link and/or GitHub link}">
+    
+    
   end
 
 end
