@@ -10,14 +10,11 @@ class Scraper
     
     scraped_students = [] 
     
-  html = Nokogiri::HTML(open(index_url)) 
-  #doc = Nokogiri::HTML(open("#https://learn-co-curriculum.github.io/student-scraper-test-page/"))
+    html = Nokogiri::HTML(open(index_url)) #doc = Nokogiri::HTML(open(url provided))
   
-  html.css(".student_card").each do |student_card|
-  #doc.css(".post").each do |post|
-  
-  #hashes_array = {} #iterate through the student cards id 
-    hash_array ={
+    html.css(".student_card").each do |student_card| #doc.css(".post").each do |post|
+      
+      hash_array ={ #hash_array = iterate through the student cards id 
       
       name: student_card.css("a .card-text-container h4.student-name").text, 
       #<a href=" ..."card-text-container"> <h4 class="student-name">{Student Name}</h4>
@@ -26,14 +23,12 @@ class Scraper
       #<a href=" ..."card-text-container"> <p class="student-location">{City, State}</p>
       
       profile_url: student_card.css("a").attribute("href").value 
-      #use ().attribute().value <a href="{Twitter link and/or LinkedIn link and/or GitHub link}">    
-    #binding.pry 
+      #use ().attribute().value <a href="{link}"> 
     } 
     scraped_students << hash_array
-     
-    end 
-    scraped_students #return the students  
     #binding.pry 
+    end 
+    scraped_students #return the students 
   end
 
   def self.scrape_profile_page(profile_url)
