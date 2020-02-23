@@ -9,7 +9,6 @@ class Scraper
     doc = Nokogiri::HTML(open(index_url))
     students = []
     doc.css("div.student-card").each do |card|
-      card.css(".student-card").each do |student|
         
       end
     end
@@ -21,3 +20,4 @@ class Scraper
 
 end
 
+#https://learn-co-curriculum.github.io/student-scraper-test-page/
